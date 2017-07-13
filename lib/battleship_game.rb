@@ -15,4 +15,8 @@ class BattleshipGame
     play_prompt_ln6 = "\nEnter the squares for the two-unit ship: "
     play_prompt_ln1 + play_prompt_ln2 + play_prompt_ln3 + play_prompt_ln4 + play_prompt_ln5 + play_prompt_ln6
   end
+
+  def instructions
+    "A short explaination on how the game is played."
+  end
 end

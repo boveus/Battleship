@@ -29,6 +29,9 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_main_menu_instructions
+    instructions_prompt = "A short explaination on how the game is played."
+
+    assert_equal instructions_prompt, @game.instructions
   end
 
   def test_main_menu_quit
