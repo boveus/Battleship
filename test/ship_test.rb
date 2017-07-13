@@ -1,7 +1,5 @@
-require './lib/ship'
 require 'simplecov'
-require './lib/battleship'
-require './lib/battleship_game'
+require './lib/ship'
 require 'minitest/autorun'
 require 'minitest/pride'
 
