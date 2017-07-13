@@ -35,6 +35,9 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_main_menu_quit
+    quit_message = "Farewell and following seas!"
+
+    assert_equal quit_message, @game.quit
   end
 end
 

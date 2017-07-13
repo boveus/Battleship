@@ -19,4 +19,8 @@ class BattleshipGame
   def instructions
     "A short explaination on how the game is played."
   end
+
+  def quit
+    return "Farewell and following seas!"
+  end
 end
