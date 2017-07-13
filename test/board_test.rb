@@ -1,1 +1,1 @@
-require './board.rb'
+require './lib/board'

@@ -1,1 +1,1 @@
-require './tile.rb'
+require './lib/tile'

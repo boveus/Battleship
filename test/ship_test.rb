@@ -1,1 +1,1 @@
-require './ship.rb'
+require './lib/ship'
