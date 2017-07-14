@@ -19,6 +19,7 @@ class MapTest < Minitest::Test
     line4 = "C #{wave} #{wave} #{wave} #{wave}\n"
     line5 = "D #{wave} #{wave} #{wave} #{wave}\n"
     bottom_border = "==========="
+    map.render_lines
 
     map_display = border + line1 + line2 + line3 + line4 + line5 + bottom_border
     assert_equal map_display, map.display
@@ -35,10 +36,9 @@ class MapTest < Minitest::Test
     line4 = "C #{wave} #{wave} #{wave} #{wave}\n"
     line5 = "D #{wave} #{wave} #{wave} #{wave}\n"
     bottom_border = "==========="
-
     map.a_grid[1].set_icon('ship')
     map.a_grid[2].set_icon('ship')
-
+    map.render_lines
     map_display = border + line1 + line2 + line3 + line4 + line5 + bottom_border
 
     assert_equal map_display, map.display
