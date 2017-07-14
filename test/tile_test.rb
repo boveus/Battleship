@@ -49,4 +49,17 @@ class TileTest < Minitest::Test
     refute tile.player2_hit
     refute tile.player2_miss
   end
+
+  def test_set_icon_for_tile
+    tile = Tile.new("A1")
+    tile.set_icon('wave')
+    assert_equal `echo "\xF0\x9F\x8C\x8A"`.strip, tile.icon
+    tile.set_icon('ship')
+    assert_equal `echo -e "\xF0\x9F\x8E\xAB"`.strip, tile.icon
+    tile.set_icon('fire')
+    assert_equal `echo -e	"\xF0\x9F\x94\xA5"`.strip, tile.icon
+    tile.set_icon('explosion')
+    assert_equal `echo -e "\xF0\x9F\x92\xA5"`.strip, tile.icon
+
+  end
 end

@@ -20,7 +20,6 @@ def test_map_can_display
   bottom_border = "==========="
 
   map_display = border + line1 + line2 + line3 + line4 + line5 + bottom_border
-
   assert_equal map_display, map.display
 end
 
