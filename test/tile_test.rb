@@ -26,6 +26,16 @@ class TileTest < Minitest::Test
     assert_instance_of Ship, tile.ship
   end
 
+  def test_if_multiple_tiles_can_contain_same_ship
+    tile = Tile.new("A1")
+    tile2 = Tile.new("A2")
+    ship = Ship.new(2, 'horizontal')
+    tile.add_ship(ship)
+    tile2.add_ship(ship)
+
+    assert_equal tile.ship, tile2.ship
+  end
+
   def test_if_tile_contains_false_by_default_for_attributes
     tile = Tile.new("A1")
 
