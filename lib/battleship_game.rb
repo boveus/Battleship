@@ -19,13 +19,9 @@ class BattleshipGame
   end
 
   def set_two_unit_ship_location(location)
-    locations = location.split(' ')
-    first_arg = locations[0].chars
-    second_arg = locations[1].chars
-    first_letter = first_arg[0]
-    first_number = first_arg[1].to_i
-    second_letter = second_arg[0]
-    second_number = second_arg[1].to_i
+    locations = convert_location(location)
+    first_letter, first_number = split_location_arguments(locations[0])
+    second_letter, second_number = split_location_arguments(locations[1])
     ship = Ship.new(2, 'horizontal')
     @map.a_grid[first_number - 1].add_ship(ship)
     @map.a_grid[second_number - 1].add_ship(ship)
@@ -33,6 +29,15 @@ class BattleshipGame
     @map.a_grid[second_number - 1].set_icon('ship')
   end
 
+  def convert_location(location)
+    location = location.split(' ')
+  end
+
+  def split_location_arguments(argument)
+    letter = argument[0]
+    number = argument[1].to_i
+    return letter, number
+  end
 
   def instructions
     "A short explaination on how the game is played."
