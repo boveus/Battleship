@@ -41,3 +41,12 @@ player_hit = false
 player_miss = false
 computer_hit = false
 computr_miss = false
+
+REPL - cmd line interaction
+
+
+read, evaluate, print, loop
+
+lib/battleship.rb
+
+allow users to quit at any time

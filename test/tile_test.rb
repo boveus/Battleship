@@ -61,6 +61,5 @@ class TileTest < Minitest::Test
     assert_equal `echo "\xF0\x9F\x94\xA5"`.strip, tile.icon
     tile.set_icon('explosion')
     assert_equal `echo "\xF0\x9F\x92\xA5"`.strip, tile.icon
-
   end
 end
