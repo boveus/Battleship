@@ -1,5 +1,10 @@
 class Map
   # initialize map with new tile objects
+  attr_reader      :a_grid,
+                   :b_grid,
+                   :c_grid,
+                   :d_grid
+
   def initialize(a_grid = [], b_grid = [], c_grid = [], d_grid = [])
     @a_grid = a_grid << Tile.new('A1') << Tile.new('A2') << Tile.new('A3') << Tile.new('A4')
     @b_grid = b_grid << Tile.new('B1') << Tile.new('B2') << Tile.new('B3') << Tile.new('B4')
