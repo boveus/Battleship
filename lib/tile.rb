@@ -25,11 +25,11 @@ class Tile
     if icon == 'wave'
       @icon = `echo "\xF0\x9F\x8C\x8A"`.strip
     elsif icon == 'ship'
-      @icon = `echo -e "\xF0\x9F\x8E\xAB"`.strip
+      @icon = `echo "\xF0\x9F\x8E\xAB"`.strip
     elsif icon == 'fire'
-      @icon = `echo -e	"\xF0\x9F\x94\xA5"`.strip
+      @icon = `echo "\xF0\x9F\x94\xA5"`.strip
     elsif icon == 'explosion'
-      @icon = `echo -e "\xF0\x9F\x92\xA5"`.strip
+      @icon = `echo "\xF0\x9F\x92\xA5"`.strip
     end
   end
 end

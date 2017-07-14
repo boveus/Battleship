@@ -4,6 +4,7 @@ require './lib/tile'
 require './lib/ship'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'pry'
 
 SimpleCov.start
 class MapTest < Minitest::Test
@@ -18,9 +19,6 @@ def test_map_can_display
   line4 = "C #{wave} #{wave} #{wave} #{wave}\n"
   line5 = "D #{wave} #{wave} #{wave} #{wave}\n"
   bottom_border = "==========="
-
-  map.init_tiles
-  map.render
 
   map_display = border + line1 + line2 + line3 + line4 + line5 + bottom_border
   assert_equal map_display, map.display

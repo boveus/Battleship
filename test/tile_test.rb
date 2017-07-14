@@ -3,6 +3,7 @@ require './lib/tile'
 require './lib/ship'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'pry'
 
 SimpleCov.start
 class TileTest < Minitest::Test
@@ -55,11 +56,11 @@ class TileTest < Minitest::Test
     tile.set_icon('wave')
     assert_equal `echo "\xF0\x9F\x8C\x8A"`.strip, tile.icon
     tile.set_icon('ship')
-    assert_equal `echo -e "\xF0\x9F\x8E\xAB"`.strip, tile.icon
+    assert_equal `echo "\xF0\x9F\x8E\xAB"`.strip, tile.icon
     tile.set_icon('fire')
-    assert_equal `echo -e	"\xF0\x9F\x94\xA5"`.strip, tile.icon
+    assert_equal `echo "\xF0\x9F\x94\xA5"`.strip, tile.icon
     tile.set_icon('explosion')
-    assert_equal `echo -e "\xF0\x9F\x92\xA5"`.strip, tile.icon
+    assert_equal `echo "\xF0\x9F\x92\xA5"`.strip, tile.icon
 
   end
 end
