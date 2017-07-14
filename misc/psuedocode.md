@@ -10,6 +10,13 @@ wave
 echo -e "\xF0\x9F\x8C\x8A"
 fire
 echo -e	"\xF0\x9F\x94\xA5"
+explosion
+echo -e "\xF0\x9F\x92\xA5"
+
+ship
+echo -e "\xF0\x9F\x8E\xAB"
+
+
 
 
 Basic plan

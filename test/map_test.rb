@@ -24,5 +24,10 @@ def test_map_can_display
   assert_equal map_display, map.display
 end
 
+def test_map_can_display_ships
+
+end
+
+
 
 end

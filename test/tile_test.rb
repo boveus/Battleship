@@ -12,6 +12,11 @@ class TileTest < Minitest::Test
     assert_equal "A1", tile.grid
   end
 
+  def test_tile_is_wave_by_default
+    tile = Tile.new("A1")
+
+    assert_equal `echo "\xF0\x9F\x8C\x8A"`.strip, tile.icon
+  end
   def test_that_tile_contains_no_ship_by_default
     tile = Tile.new("A1")
 
