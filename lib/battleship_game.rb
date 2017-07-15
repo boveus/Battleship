@@ -18,15 +18,35 @@ class BattleshipGame
     play_prompt_ln1 + play_prompt_ln2 + play_prompt_ln3 + play_prompt_ln4 + play_prompt_ln5 + play_prompt_ln6
   end
 
+  def instructions
+    "A short explaination on how the game is played."
+  end
+
+  def quit
+    return "Farewell and following seas!"
+  end
+
   def set_two_unit_ship_location(location)
     locations = convert_location(location)
     first_letter, first_number = split_location_arguments(locations[0])
     second_letter, second_number = split_location_arguments(locations[1])
-    ship = Ship.new(2, 'horizontal')
-    @map.a_grid[first_number - 1].add_ship(ship)
-    @map.a_grid[second_number - 1].add_ship(ship)
-    @map.a_grid[first_number - 1].set_icon('ship')
-    @map.a_grid[second_number - 1].set_icon('ship')
+    valid, orientation = validate_location(location)
+    if valid
+      ship = Ship.new(2, orientation)
+      @map.a_grid[first_number - 1].add_ship(ship)
+      @map.a_grid[second_number - 1].add_ship(ship)
+      @map.a_grid[first_number - 1].set_icon('ship')
+      @map.a_grid[second_number - 1].set_icon('ship')
+    end
+  end
+
+  def validate_location(location)
+    locations = location.split(' ')
+    first_letter, first_number = split_location_arguments(locations[0])
+    second_letter, second_number = split_location_arguments(locations[1])
+    if first_letter == second_letter && first_number != second_number && second_number == first_number + 1
+      return true, 'horizontal'
+    end
   end
 
   def convert_location(location)
@@ -39,11 +59,5 @@ class BattleshipGame
     return letter, number
   end
 
-  def instructions
-    "A short explaination on how the game is played."
-  end
 
-  def quit
-    return "Farewell and following seas!"
-  end
 end
