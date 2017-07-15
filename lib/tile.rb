@@ -7,7 +7,7 @@ class Tile
               :player2_hit,
               :player2_miss
 
-  def initialize(grid)
+  def initialize
     @ship = nil
     @player_hit = false
     @player_miss = false

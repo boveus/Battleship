@@ -5,11 +5,11 @@ class Map
                    :c_grid,
                    :d_grid
 
-  def initialize(a_grid = [], b_grid = [], c_grid = [], d_grid = [])
-    @a_grid = a_grid << Tile.new('A1') << Tile.new('A2') << Tile.new('A3') << Tile.new('A4')
-    @b_grid = b_grid << Tile.new('B1') << Tile.new('B2') << Tile.new('B3') << Tile.new('B4')
-    @c_grid = c_grid << Tile.new('C1') << Tile.new('C2') << Tile.new('C3') << Tile.new('C4')
-    @d_grid = d_grid << Tile.new('D1') << Tile.new('D2') << Tile.new('D3') << Tile.new('D4')
+  def initialize
+    @a_grid = {}
+    @b_grid = {}
+    @c_grid = {}
+    @d_grid = {}
     @border = "===========\n"
     @line1 = ". 1 2 3 4 \n"
     @line2 = ''
@@ -17,7 +17,29 @@ class Map
     @line4 = ''
     @line5 = ''
     @bottom_border = "==========="
-    @border + @line1 + @line2 + @line3 + @line4 + @line5 + @bottom_border
+    initialize_tiles
+  end
+
+  def initialize_tiles
+    a_values = ['A1', 'A2', 'A3', 'A4']
+    a_values.each do |grid_value|
+      @a_grid[grid_value] = Tile.new
+    end
+
+    b_values = ['B1', 'B2', 'B3', 'B4']
+    b_values.each do |grid_value|
+      @b_grid[grid_value] = Tile.new
+    end
+
+    c_values = ['C1', 'C2', 'C3', 'C4']
+    c_values.each do |grid_value|
+      @c_grid[grid_value] = Tile.new
+    end
+
+    d_values = ['D1', 'D2', 'D3', 'D4']
+    d_values.each do |grid_value|
+      @d_grid[grid_value] = Tile.new
+    end
   end
   def display
     render_lines
@@ -25,9 +47,9 @@ class Map
   end
 
   def render_lines
-    @line2 = "A " + @a_grid[0].icon + " " + @a_grid[1].icon + " " + @a_grid[2].icon + " " + @a_grid[3].icon + "\n"
-    @line3 = "B " + @b_grid[0].icon + " " + @b_grid[1].icon + " " + @b_grid[2].icon + " " + @b_grid[3].icon + "\n"
-    @line4 = "C " + @c_grid[0].icon + " " + @c_grid[1].icon + " " + @c_grid[2].icon + " " + @c_grid[3].icon + "\n"
-    @line5 = "D " + @d_grid[0].icon + " " + @d_grid[1].icon + " " + @d_grid[2].icon + " " + @d_grid[3].icon + "\n"
+    @line2 = "A " + a_grid['A1'].icon + " " + a_grid['A2'].icon + " " + a_grid['A3'].icon + " " + a_grid['A4'].icon + "\n"
+    @line3 = "B " + b_grid['B1'].icon + " " + b_grid['B2'].icon + " " + b_grid['B3'].icon + " " + b_grid['B4'].icon + "\n"
+    @line4 = "C " + c_grid['C1'].icon + " " + c_grid['C2'].icon + " " + c_grid['C3'].icon + " " + c_grid['C4'].icon + "\n"
+    @line5 = "D " + d_grid['D1'].icon + " " + d_grid['D2'].icon + " " + d_grid['D3'].icon + " " + d_grid['D4'].icon + "\n"
   end
 end
