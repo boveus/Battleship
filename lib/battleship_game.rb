@@ -53,7 +53,7 @@ class BattleshipGame
     end
   end
 
-  def valid_vertical_number_pair()
+  def valid_horizontal_number_pair(first_number, second_number)
     if first_number == second_number - 1 && first_number < 4
       true
     elsif second_number == first_number - 1 && second_number < 4
@@ -61,7 +61,13 @@ class BattleshipGame
     end
   end
 
-  # 
+  def valid_vertical_number_pair(first_number, second_number)
+    if first_number == second_number && first_number < 4
+      true
+    end
+  end
+
+  #
   # first letter == second letter && first_number == second_number - 1 && first_number < 4
   # first letter == second letter && second_number == first_number - 1 && second_number < 4
   #
@@ -74,7 +80,7 @@ class BattleshipGame
     locations = location.split(' ')
     first_letter, first_number = split_location_arguments(locations[0])
     second_letter, second_number = split_location_arguments(locations[1])
-    if first_letter == second_letter && first_number != second_number && second_number == first_number + 1
+    if first_letter == second_letter && valid_horizontal_number_pair(first_number, second_number)
       return true, 'horizontal'
     elsif valid_vertical_letter_pair(first_letter, second_letter) && first_number == second_number
       return true, 'vertical'
