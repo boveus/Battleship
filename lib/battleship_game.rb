@@ -29,20 +29,21 @@ class BattleshipGame
   def set_two_unit_ship_location(location)
     locations = convert_location(location)
     first_letter, first_number = split_location_arguments(locations[0])
-    second_letter, second_number = split_location_arguments(locations[1])
     valid, orientation = validate_location(location)
-    if valid && first_letter == 'A' && second_letter == 'A'
-      ship = Ship.new(2, orientation)
-      @map.a_grid[locations[0]].add_ship(ship)
-      @map.a_grid[locations[1]].add_ship(ship)
-    elsif valid && first_letter == 'A' && second_letter == 'B'
-      ship = Ship.new(2, orientation)
-      @map.a_grid[locations[0]].add_ship(ship)
-      @map.b_grid[locations[1]].add_ship(ship)
+    if valid
+      add_ship(first_letter, orientation, locations)
+    # if valid && first_letter == 'A' && second_letter == 'A'
+    #   ship = Ship.new(2, orientation)
+    #   @map.a_grid[locations[0]].add_ship(ship)
+    #   @map.a_grid[locations[1]].add_ship(ship)
+    # elsif valid && first_letter == 'A' && second_letter == 'B'
+    #   ship = Ship.new(2, orientation)
+    #   @map.a_grid[locations[0]].add_ship(ship)
+    #   @map.b_grid[locations[1]].add_ship(ship)
     end
   end
 
-  def add_ship(grid, orientation, locations)
+  def add_ship(first_letter, orientation, locations)
     ship = ship = Ship.new(2, orientation)
     if first_letter == 'A' && orientation == 'Horizontal'
       @map.a_grid[locations[0]].add_ship(ship)
@@ -104,9 +105,9 @@ class BattleshipGame
     first_letter, first_number = split_location_arguments(locations[0])
     second_letter, second_number = split_location_arguments(locations[1])
     if first_letter == second_letter && valid_horizontal_number_pair(first_number, second_number)
-      return true, 'horizontal'
+      return true, 'Horizontal'
     elsif valid_vertical_letter_pair(first_letter, second_letter) && first_number == second_number
-      return true, 'vertical'
+      return true, 'Vertical'
     end
   end
 
