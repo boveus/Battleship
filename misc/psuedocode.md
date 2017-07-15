@@ -50,3 +50,20 @@ read, evaluate, print, loop
 lib/battleship.rb
 
 allow users to quit at any time
+
+
+two ship locations validate_location
+first letter == second letter && first_number == second_number - 1 && first_number < 4
+first letter == second letter && second_number == first_number - 1 && second_number < 4
+
+first letter == 'A' && second letter == 'B' && first number == second_number && first_number < 5
+first letter == 'B' && second letter == 'C' && first number == second_number && first_number < 5
+first letter == 'C' && second letter == 'D' && first number == second_number && first_number < 5
+C4  D4
+B4 D4
+
+C3 D3      D3 C3    
+
+INVALID
+
+A1 A3        A1 B3      A2 D2

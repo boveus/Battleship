@@ -34,7 +34,6 @@ class BattleshipGame
     if valid && first_letter == 'A' && second_letter == 'A'
       ship = Ship.new(2, orientation)
       @map.a_grid[locations[0]].add_ship(ship)
-
       @map.a_grid[locations[1]].add_ship(ship)
     elsif valid && first_letter == 'A' && second_letter == 'B'
       ship = Ship.new(2, orientation)
@@ -53,6 +52,23 @@ class BattleshipGame
       true
     end
   end
+
+  def valid_vertical_number_pair()
+    if first_number == second_number - 1 && first_number < 4
+      true
+    elsif second_number == first_number - 1 && second_number < 4
+      true
+    end
+  end
+
+  # 
+  # first letter == second letter && first_number == second_number - 1 && first_number < 4
+  # first letter == second letter && second_number == first_number - 1 && second_number < 4
+  #
+  # first letter == 'A' && second letter == 'B' && first number == second_number && first_number < 5
+  # first letter == 'B' && second letter == 'C' && first number == second_number && first_number < 5
+  # first letter == 'C' && second letter == 'D' && first number == second_number && first_number < 5
+
 
   def validate_location(location)
     locations = location.split(' ')
