@@ -54,24 +54,10 @@ class BattleshipGameTest < Minitest::Test
     assert_instance_of Ship, @game.map.b_grid[0].ship
   end
 
+  def test_set_two_unit_ship_invalid_location
+    @game.set_two_unit_ship_location('A1 B3')
+
+    assert_nil @game.map.a_grid[0].ship
+    assert_nil @game.map.b_grid[2].ship
+  end
 end
-
-
-
-
-
-# You are to build a playable game of Battleship that runs in a REPL interface.
-# The game will allow a single human player to play against a (simplistic) computer player.
-#
-# The game will include several distinct phases:
-#
-#
-# The player starts the game by running ruby battleship.rb from within your project directory
-# Then they see:
-# Welcome to BATTLESHIP
-#
-# Would you like to (p)lay, read the (i)nstructions, or (q)uit?
-# >
-# If they enter p or play then they enter the ship layout described below.
-# If they enter i or instructions they should be presented with a short explanation of how the game is played.
-# If they enter q or quit then the game should exit
