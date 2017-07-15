@@ -54,6 +54,8 @@ class BattleshipGameTest < Minitest::Test
     assert_instance_of Ship, @game.map.b_grid['B1'].ship
   end
 
+  # def test_set_two_unit_ship
+
   def test_set_two_unit_ship_invalid_location
     @game.set_two_unit_ship_location('A1 B3')
     @game.set_two_unit_ship_location('A1 A1')

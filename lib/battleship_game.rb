@@ -38,10 +38,33 @@ class BattleshipGame
     elsif valid && first_letter == 'A' && second_letter == 'B'
       ship = Ship.new(2, orientation)
       @map.a_grid[locations[0]].add_ship(ship)
-
       @map.b_grid[locations[1]].add_ship(ship)
     end
   end
+
+  def add_ship(grid, orientation, locations)
+    ship = ship = Ship.new(2, orientation)
+    if first_letter == 'A' && orientation == 'Horizontal'
+      @map.a_grid[locations[0]].add_ship(ship)
+      @map.a_grid[locations[1]].add_ship(ship)
+    elsif first_letter == 'A' && orientation == 'Vertical'
+      @map.a_grid[locations[0]].add_ship(ship)
+      @map.b_grid[locations[1]].add_ship(ship)
+    elsif first_letter == 'B' && orientation == 'Horizontal'
+      @map.b_grid[locations[0]].add_ship(ship)
+      @map.b_grid[locations[1]].add_ship(ship)
+    elsif first_letter == 'B' && orientation == 'Vertical'
+      @map.b_grid[locations[0]].add_ship(ship)
+      @map.c_grid[locations[1]].add_ship(ship)
+    elsif first_letter == 'C' && orientation == 'Horizontal'
+      @map.c_grid[locations[0]].add_ship(ship)
+      @map.c_grid[locations[1]].add_ship(ship)
+    elsif first_letter == 'D' && orientation == 'Horizontal'
+      @map.a_grid[locations[0]].add_ship(ship)
+      @map.a_grid[locations[1]].add_ship(ship)
+    end
+  end
+
 
   def valid_vertical_letter_pair(first_letter, second_letter)
     if first_letter == 'A' && second_letter == 'B'
