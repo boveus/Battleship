@@ -57,6 +57,7 @@ class BattleshipGameTest < Minitest::Test
   def test_set_two_unit_ship_invalid_location
     @game.set_two_unit_ship_location('A1 B3')
     @game.set_two_unit_ship_location('A1 A1')
+    # @game.set_two_unit_ship_location('A4 A5')
 
     assert_nil @game.map.a_grid['A1'].ship
     assert_nil @game.map.b_grid['B3'].ship
