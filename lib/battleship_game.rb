@@ -33,14 +33,14 @@ class BattleshipGame
     valid, orientation = validate_location(location)
     if valid && first_letter == 'A' && second_letter == 'A'
       ship = Ship.new(2, orientation)
-      @map.a_grid[first_number - 1].add_ship(ship)
+      @map.a_grid[locations[0]].add_ship(ship)
 
-      @map.a_grid[second_number - 1].add_ship(ship)
+      @map.a_grid[locations[1]].add_ship(ship)
     elsif valid && first_letter == 'A' && second_letter == 'B'
       ship = Ship.new(2, orientation)
-      @map.a_grid[first_number - 1].add_ship(ship)
+      @map.a_grid[locations[0]].add_ship(ship)
 
-      @map.b_grid[second_number - 1].add_ship(ship)
+      @map.b_grid[locations[1]].add_ship(ship)
     end
   end
 
