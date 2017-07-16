@@ -49,9 +49,12 @@ class BattleshipGameTest < Minitest::Test
 
   def test_set_two_unit_ship_location_vertical
     @game.set_two_unit_ship_location('A1 B1')
+    @game.set_two_unit_ship_location('B3 C3')
 
     assert_instance_of Ship, @game.map.a_grid['A1'].ship
     assert_instance_of Ship, @game.map.b_grid['B1'].ship
+    assert_instance_of Ship, @game.map.b_grid['B3'].ship
+    assert_instance_of Ship, @game.map.c_grid['C3'].ship
   end
 
   # def test_set_two_unit_ship
