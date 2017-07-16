@@ -26,12 +26,14 @@ class BattleshipGame
     return "Farewell and following seas!"
   end
 
-  def set_two_unit_ship_location(location)
+  def set_ship_location(location)
     locations = convert_location(location)
     first_letter, first_number = split_location_arguments(locations[0])
     valid, orientation = validate_location_two_unit(location)
-    if valid
+    if valid && locations.count == 2
       add_two_unit_ship(first_letter, orientation, locations)
+    elsif valid && locations.count == 3
+      add_three_unit_ship(first_letter, orientation, locations)
     end
   end
 
@@ -61,46 +63,38 @@ class BattleshipGame
     end
   end
 
-  def set_three_unit_ship_location(location)
-    locations = convert_location(location)
-    first_letter, first_number = split_location_arguments(locations[0])
-    valid, orientation = validate_location_three_unit(location)
-    if valid
-      add_three_unit_ship(first_letter, orientation, locations)
-    end
-  end
-
   def add_three_unit_ship(first_letter, orientation, locations)
     ship = ship = Ship.new(3, orientation)
-    if first_letter == 'A' && orientation == 'Horizontal' && check_locations_for_ship(locations, first_letter)
+    if first_letter == 'A' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter)
       @map.a_grid[locations[0]].add_ship(ship)
       @map.a_grid[locations[1]].add_ship(ship)
       @map.a_grid[locations[2]].add_ship(ship)
     elsif first_letter == 'A' && orientation == 'Vertical'
       @map.a_grid[locations[0]].add_ship(ship)
       @map.b_grid[locations[1]].add_ship(ship)
-    elsif first_letter == 'B' && orientation == 'Horizontal' && check_locations_for_ship(locations, first_letter)
+      @map.c_grid[locations[2]].add_ship(ship)
+    elsif first_letter == 'B' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter)
       @map.b_grid[locations[0]].add_ship(ship)
       @map.b_grid[locations[1]].add_ship(ship)
       @map.b_grid[locations[2]].add_ship(ship)
     elsif first_letter == 'B' && orientation == 'Vertical'
       @map.b_grid[locations[0]].add_ship(ship)
       @map.c_grid[locations[1]].add_ship(ship)
-    elsif first_letter == 'C' && orientation == 'Horizontal' && check_locations_for_ship(locations, first_letter)
+      @map.d_grid[locations[2]].add_ship(ship)
+    elsif first_letter == 'C' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter)
       @map.c_grid[locations[0]].add_ship(ship)
       @map.c_grid[locations[1]].add_ship(ship)
       @map.c_grid[locations[2]].add_ship(ship)
     elsif first_letter == 'C' && orientation == 'Vertical'
-      @map.c_grid[locations[0]].add_ship(ship)
-      @map.d_grid[locations[1]].add_ship(ship)
-    elsif first_letter == 'D' && orientation == 'Horizontal' && check_locations_for_ship(locations, first_letter)
+        #invalid for 4x4
+    elsif first_letter == 'D' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter)
       @map.d_grid[locations[0]].add_ship(ship)
       @map.d_grid[locations[1]].add_ship(ship)
       @map.d_grid[locations[2]].add_ship(ship)
     end
   end
 
-  def check_locations_for_ship(locations, letter)
+  def check_horizontal_for_ship(locations, letter)
     if letter == 'A'
     locations.all? do |location|
        @map.a_grid[location].ship == nil
@@ -138,12 +132,6 @@ class BattleshipGame
     end
   end
 
-  def valid_vertical_number_pair(first_number, second_number)
-    if first_number == second_number && first_number < 4
-      true
-    end
-  end
-
   def validate_location_two_unit(location)
     locations = location.split(' ')
     first_letter, first_number = split_location_arguments(locations[0])
@@ -159,10 +147,21 @@ class BattleshipGame
     locations = location.split(' ')
     first_letter, first_number = split_location_arguments(locations[0])
     second_letter, second_number = split_location_arguments(locations[1])
+    third_letter, third_number = split_location_arguments(locations[2])
     if first_letter == second_letter && valid_horizontal_number_pair(first_number, second_number)
       return true, 'Horizontal'
-    elsif valid_vertical_letter_pair(first_letter, second_letter) && first_number == second_number
+    elsif valid_vertical_letter_pair(first_letter, second_letter) && three_numbers_valid(first_number, second_number, third_number)
       return true, 'Vertical'
+    end
+  end
+
+  def three_numbers_valid(first_number, second_number, third_number)
+    valid_vertical_number_pair(first_number, second_number) && second_number == third_number
+  end
+
+  def valid_vertical_number_pair(first_number, second_number)
+    if first_number == second_number && first_number < 4
+      true
     end
   end
 

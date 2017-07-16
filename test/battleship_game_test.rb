@@ -41,16 +41,16 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_set_two_unit_ship_location_horizontal
-    @game.set_two_unit_ship_location('A1 A2')
+    @game.set_ship_location('A1 A2')
 
     assert_instance_of Ship, @game.map.a_grid['A1'].ship
     assert_instance_of Ship, @game.map.a_grid['A2'].ship
   end
 
   def test_set_two_unit_ship_location_vertical
-    @game.set_two_unit_ship_location('A1 B1')
-    @game.set_two_unit_ship_location('B3 C3')
-    @game.set_two_unit_ship_location('C1 D1')
+    @game.set_ship_location('A1 B1')
+    @game.set_ship_location('B3 C3')
+    @game.set_ship_location('C1 D1')
 
     assert_instance_of Ship, @game.map.a_grid['A1'].ship
     assert_instance_of Ship, @game.map.b_grid['B1'].ship
@@ -61,16 +61,16 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_set_two_unit_ship_invalid_location
-    @game.set_two_unit_ship_location('A1 B3')
-    @game.set_two_unit_ship_location('A1 A1')
-    @game.set_two_unit_ship_location('A4 A5')
+    @game.set_ship_location('A1 B3')
+    @game.set_ship_location('A1 A1')
+    @game.set_ship_location('A4 A5')
 
     assert_nil @game.map.a_grid['A1'].ship
     assert_nil @game.map.b_grid['B3'].ship
   end
 
   def test_ship_getting_hit
-    @game.set_two_unit_ship_location('A1 A2')
+    @game.set_ship_location('A1 A2')
     @game.map.a_grid['A1'].ship.hit
 
     assert_equal 1, @game.map.a_grid['A1'].ship.health
@@ -78,7 +78,7 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_ship_can_sink
-    @game.set_two_unit_ship_location('A1 A2')
+    @game.set_ship_location('A1 A2')
     @game.map.a_grid['A1'].ship.hit
     @game.map.a_grid['A2'].ship.hit
 
@@ -87,20 +87,33 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_set_three_unit_ship_location_horizontal
-    @game.set_three_unit_ship_location('A1 A2 A3')
+    @game.set_ship_location('A1 A2 A3')
 
     assert_instance_of Ship, @game.map.a_grid['A1'].ship
     assert_instance_of Ship, @game.map.a_grid['A2'].ship
     assert_instance_of Ship, @game.map.a_grid['A3'].ship
   end
 
+  def test_set_three_unit_ship_location_vertical
+    @game.set_ship_location('B1 C1 D1')
+
+    assert_instance_of Ship, @game.map.b_grid['B1'].ship
+    assert_instance_of Ship, @game.map.c_grid['C1'].ship
+    assert_instance_of Ship, @game.map.d_grid['D1'].ship
+  end
+
+
   def test_set_three_unit_ship_with_two_unit_in_path
-    @game.set_two_unit_ship_location('A1 A2')
-    @game.set_three_unit_ship_location('A1 A2 A3')
+    @game.set_ship_location('A1 A2')
+    @game.set_ship_location('A1 A2 A3')
+    @game.set_ship_location('A2 A3 A4')
+    @game.set_ship_location('B1 B2 B3')
 
 
     assert_instance_of Ship, @game.map.a_grid['A1'].ship
     assert_instance_of Ship, @game.map.a_grid['A2'].ship
     refute_instance_of Ship, @game.map.a_grid['A3'].ship
+    refute_instance_of Ship, @game.map.a_grid['A4'].ship
+    assert_instance_of Ship, @game.map.b_grid['B1'].ship
   end
 end
