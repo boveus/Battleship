@@ -102,22 +102,26 @@ class BattleshipGame
     end
   end
 
+  def && check_vertical_for_ship(locations, letter, map)
+
+  end
+
   def check_horizontal_for_ship(locations, letter, map)
     if letter == 'A'
     locations.all? do |location|
-       @player_one_map.a_grid[location].ship == nil
+       map.a_grid[location].ship == nil
     end
     elsif letter == 'B'
       locations.all? do |location|
-         @player_one_map.b_grid[location].ship == nil
+         map.b_grid[location].ship == nil
       end
     elsif letter == 'C'
       locations.all? do |location|
-         @player_one_map.c_grid[location].ship == nil
+         map.c_grid[location].ship == nil
       end
     elsif letter == 'D'
       locations.all? do |location|
-         @player_one_map.d_grid[location].ship == nil
+         map.d_grid[location].ship == nil
       end
     end
   end
