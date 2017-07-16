@@ -39,10 +39,8 @@ class TileTest < Minitest::Test
   def test_if_tile_contains_false_by_default_for_attributes
     tile = Tile.new
 
-    refute tile.player_hit
-    refute tile.player_miss
-    refute tile.player2_hit
-    refute tile.player2_miss
+    refute tile.opponent_hit
+    refute tile.opponent_miss
   end
 
   def test_set_icon_for_tile

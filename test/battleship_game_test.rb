@@ -41,16 +41,16 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_set_two_unit_ship_location_horizontal
-    @game.set_ship_location('A1 A2')
+    @game.set_ship_location('A1 A2', 'Player1')
 
     assert_instance_of Ship, @game.player_one_map.a_grid['A1'].ship
     assert_instance_of Ship, @game.player_one_map.a_grid['A2'].ship
   end
 
   def test_set_two_unit_ship_location_vertical
-    @game.set_ship_location('A1 B1')
-    @game.set_ship_location('B3 C3')
-    @game.set_ship_location('C1 D1')
+    @game.set_ship_location('A1 B1', 'Player1')
+    @game.set_ship_location('B3 C3', 'Player1')
+    @game.set_ship_location('C1 D1', 'Player1')
 
     assert_instance_of Ship, @game.player_one_map.a_grid['A1'].ship
     assert_instance_of Ship, @game.player_one_map.b_grid['B1'].ship
@@ -61,16 +61,16 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_set_two_unit_ship_invalid_location
-    @game.set_ship_location('A1 B3')
-    @game.set_ship_location('A1 A1')
-    @game.set_ship_location('A4 A5')
+    @game.set_ship_location('A1 B3', 'Player1')
+    @game.set_ship_location('A1 A1', 'Player1')
+    @game.set_ship_location('A4 A5', 'Player1')
 
     assert_nil @game.player_one_map.a_grid['A1'].ship
     assert_nil @game.player_one_map.b_grid['B3'].ship
   end
 
   def test_ship_getting_hit
-    @game.set_ship_location('A1 A2')
+    @game.set_ship_location('A1 A2', 'Player1')
     @game.player_one_map.a_grid['A1'].ship.hit
 
     assert_equal 1, @game.player_one_map.a_grid['A1'].ship.health
@@ -78,7 +78,7 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_ship_can_sink
-    @game.set_ship_location('A1 A2')
+    @game.set_ship_location('A1 A2', 'Player1')
     @game.player_one_map.a_grid['A1'].ship.hit
     @game.player_one_map.a_grid['A2'].ship.hit
 
@@ -87,7 +87,7 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_set_three_unit_ship_location_horizontal
-    @game.set_ship_location('A1 A2 A3')
+    @game.set_ship_location('A1 A2 A3', 'Player1')
 
     assert_instance_of Ship, @game.player_one_map.a_grid['A1'].ship
     assert_instance_of Ship, @game.player_one_map.a_grid['A2'].ship
@@ -95,7 +95,7 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_set_three_unit_ship_location_vertical
-    @game.set_ship_location('B1 C1 D1')
+    @game.set_ship_location('B1 C1 D1', 'Player1')
 
     assert_instance_of Ship, @game.player_one_map.b_grid['B1'].ship
     assert_instance_of Ship, @game.player_one_map.c_grid['C1'].ship
@@ -104,10 +104,10 @@ class BattleshipGameTest < Minitest::Test
 
 
   def test_set_three_unit_ship_with_two_unit_in_path
-    @game.set_ship_location('A1 A2')
-    @game.set_ship_location('A1 A2 A3')
-    @game.set_ship_location('A2 A3 A4')
-    @game.set_ship_location('B1 B2 B3')
+    @game.set_ship_location('A1 A2', 'Player1')
+    @game.set_ship_location('A1 A2 A3', 'Player1')
+    @game.set_ship_location('A2 A3 A4', 'Player1')
+    @game.set_ship_location('B1 B2 B3', 'Player1')
 
 
     assert_instance_of Ship, @game.player_one_map.a_grid['A1'].ship

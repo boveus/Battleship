@@ -2,17 +2,13 @@ class Tile
   attr_reader :icon,
               :grid,
               :ship,
-              :player_hit,
-              :player_miss,
-              :player2_hit,
-              :player2_miss
+              :opponent_hit,
+              :opponent_miss
 
   def initialize
     @ship = nil
-    @player_hit = false
-    @player_miss = false
-    @player2_hit = false
-    @player2_miss = false
+    @opponent_hit = false
+    @opponent_miss = false
     @icon = `echo "\xF0\x9F\x8C\x8A"`.strip
   end
 
