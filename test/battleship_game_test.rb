@@ -60,8 +60,6 @@ class BattleshipGameTest < Minitest::Test
     assert_instance_of Ship, @game.map.d_grid['D1'].ship
   end
 
-  # def test_set_two_unit_ship
-
   def test_set_two_unit_ship_invalid_location
     @game.set_two_unit_ship_location('A1 B3')
     @game.set_two_unit_ship_location('A1 A1')
@@ -88,4 +86,11 @@ class BattleshipGameTest < Minitest::Test
     assert @game.map.a_grid['A2'].ship.is_sunken?
   end
 
+  def test_set_three_unit_ship_location_horizontal
+    @game.set_three_unit_ship_location('A1 A2 A3')
+
+    assert_instance_of Ship, @game.map.a_grid['A1'].ship
+    assert_instance_of Ship, @game.map.a_grid['A2'].ship
+    assert_instance_of Ship, @game.map.a_grid['A3'].ship
+  end
 end

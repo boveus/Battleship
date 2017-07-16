@@ -61,6 +61,36 @@ class BattleshipGame
     end
   end
 
+  def add_three_unit_ship(first_letter, orientation, locations)
+    ship = ship = Ship.new(3, orientation)
+    if first_letter == 'A' && orientation == 'Horizontal'
+      @map.a_grid[locations[0]].add_ship(ship)
+      @map.a_grid[locations[1]].add_ship(ship)
+      @map.a_grid[locations[2]].add_ship(ship)
+    elsif first_letter == 'A' && orientation == 'Vertical'
+      @map.a_grid[locations[0]].add_ship(ship)
+      @map.b_grid[locations[1]].add_ship(ship)
+    elsif first_letter == 'B' && orientation == 'Horizontal'
+      @map.b_grid[locations[0]].add_ship(ship)
+      @map.b_grid[locations[1]].add_ship(ship)
+      @map.b_grid[locations[2]].add_ship(ship)
+    elsif first_letter == 'B' && orientation == 'Vertical'
+      @map.b_grid[locations[0]].add_ship(ship)
+      @map.c_grid[locations[1]].add_ship(ship)
+    elsif first_letter == 'C' && orientation == 'Horizontal'
+      @map.c_grid[locations[0]].add_ship(ship)
+      @map.c_grid[locations[1]].add_ship(ship)
+      @map.c_grid[locations[2]].add_ship(ship)
+    elsif first_letter == 'C' && orientation == 'Vertical'
+      @map.c_grid[locations[0]].add_ship(ship)
+      @map.d_grid[locations[1]].add_ship(ship)
+    elsif first_letter == 'D' && orientation == 'Horizontal'
+      @map.d_grid[locations[0]].add_ship(ship)
+      @map.d_grid[locations[1]].add_ship(ship)
+      @map.d_grid[locations[2]].add_ship(ship)
+    end
+  end
+
 
   def valid_vertical_letter_pair(first_letter, second_letter)
     if first_letter == 'A' && second_letter == 'B'
@@ -85,15 +115,6 @@ class BattleshipGame
       true
     end
   end
-
-  #
-  # first letter == second letter && first_number == second_number - 1 && first_number < 4
-  # first letter == second letter && second_number == first_number - 1 && second_number < 4
-  #
-  # first letter == 'A' && second letter == 'B' && first number == second_number && first_number < 5
-  # first letter == 'B' && second letter == 'C' && first number == second_number && first_number < 5
-  # first letter == 'C' && second letter == 'D' && first number == second_number && first_number < 5
-
 
   def validate_location(location)
     locations = location.split(' ')
