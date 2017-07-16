@@ -1,9 +1,16 @@
 class BattleshipGame
   attr_reader   :player_one_map,
-                :player_two_map
+                :player_two_map,
+                :player_one_total_health,
+                :player_two_total_health
+                
   def initialize
     @player_one_map = Map.new
     @player_two_map = Map.new
+    @player_one_ships = []
+    @player_two_ships = []
+    @player_one_total_health = player_total_ship_health(@player_one_ships)
+    @player_two_total_health = player_total_ship_health(@player_two_ships)
   end
 
   def main_menu
@@ -28,25 +35,29 @@ class BattleshipGame
     return "Farewell and following seas!"
   end
 
-  def set_ship_location(location, player)
-    map = ''
+  def set_ship_location(location, player, map = '')
     if player == 'Player1'
       map = @player_one_map
+      ship_list = @player_one_ships
     elsif player == 'Player2'
       map = @player_two_map
+      ship_list = @player_one_ships
     end
     locations = convert_location(location)
     first_letter, first_number = split_location_arguments(locations[0])
     valid, orientation = validate_location_two_unit(location)
     if valid && locations.count == 2
-      add_two_unit_ship(first_letter, orientation, locations, map)
+      ship = Ship.new(2, orientation)
+      ship_list << ship
+      add_two_unit_ship(first_letter, orientation, locations, map, ship)
     elsif valid && locations.count == 3
-      add_three_unit_ship(first_letter, first_number, orientation, locations, map)
+      ship = Ship.new(3, orientation)
+      ship_list << ship
+      add_three_unit_ship(first_letter, first_number, orientation, locations, map, ship)
     end
   end
 
-  def add_two_unit_ship(first_letter, orientation, locations, map)
-    ship = ship = Ship.new(2, orientation)
+  def add_two_unit_ship(first_letter, orientation, locations, map, ship)
     if first_letter == 'A' && orientation == 'Horizontal'
       map.a_grid[locations[0]].add_ship(ship)
       map.a_grid[locations[1]].add_ship(ship)
@@ -71,8 +82,7 @@ class BattleshipGame
     end
   end
 
-  def add_three_unit_ship(first_letter, first_number, orientation, locations, map)
-    ship = ship = Ship.new(3, orientation)
+  def add_three_unit_ship(first_letter, first_number, orientation, locations, map, ship)
     if first_letter == 'A' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter, map)
       map.a_grid[locations[0]].add_ship(ship)
       map.a_grid[locations[1]].add_ship(ship)
@@ -187,5 +197,12 @@ class BattleshipGame
     letter = argument[0]
     number = argument[1].to_i
     return letter, number
+  end
+
+  def player_total_ship_health(array, total = 0)
+    array.each do |ship|
+      total += ship.health
+    end
+    total
   end
 end

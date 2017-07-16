@@ -123,4 +123,16 @@ class BattleshipGameTest < Minitest::Test
     refute_instance_of Ship, @game.player_one_map.a_grid['A4'].ship
     assert_instance_of Ship, @game.player_one_map.b_grid['B1'].ship
   end
+
+  def test_sinking_all_the_ships
+    @game.set_ship_location('A1 A2', 'Player1')
+    @game.set_ship_location('B1 B2 B3', 'Player1')
+    @game.player_one_map.a_grid['A1'].ship.hit
+    @game.player_one_map.a_grid['A2'].ship.hit
+    @game.player_one_map.b_grid['B1'].ship.hit
+    @game.player_one_map.b_grid['B2'].ship.hit
+    @game.player_one_map.b_grid['B3'].ship.hit
+
+    assert_equal 0, @game.player_one_total_health
+  end
 end
