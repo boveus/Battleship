@@ -93,4 +93,14 @@ class BattleshipGameTest < Minitest::Test
     assert_instance_of Ship, @game.map.a_grid['A2'].ship
     assert_instance_of Ship, @game.map.a_grid['A3'].ship
   end
+
+  def test_set_three_unit_ship_with_two_unit_in_path
+    @game.set_two_unit_ship_location('A1 A2')
+    @game.set_three_unit_ship_location('A1 A2 A3')
+
+
+    assert_instance_of Ship, @game.map.a_grid['A1'].ship
+    assert_instance_of Ship, @game.map.a_grid['A2'].ship
+    refute_instance_of Ship, @game.map.a_grid['A3'].ship
+  end
 end
