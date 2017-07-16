@@ -31,7 +31,7 @@ class BattleshipGame
     first_letter, first_number = split_location_arguments(locations[0])
     valid, orientation = validate_location(location)
     if valid
-      add_ship(first_letter, orientation, locations)
+      add_two_unit_ship(first_letter, orientation, locations)
     # if valid && first_letter == 'A' && second_letter == 'A'
     #   ship = Ship.new(2, orientation)
     #   @map.a_grid[locations[0]].add_ship(ship)
@@ -43,7 +43,7 @@ class BattleshipGame
     end
   end
 
-  def add_ship(first_letter, orientation, locations)
+  def add_two_unit_ship(first_letter, orientation, locations)
     ship = ship = Ship.new(2, orientation)
     if first_letter == 'A' && orientation == 'Horizontal'
       @map.a_grid[locations[0]].add_ship(ship)
