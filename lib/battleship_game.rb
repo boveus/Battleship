@@ -100,6 +100,25 @@ class BattleshipGame
     end
   end
 
+  def check_locations_for_ship(locations, letter)
+    if letter == 'A'
+    locations.all? do |location|
+       @map.a_grid[location].ship == nil
+    end
+    elsif letter == 'B'
+      locations.all? do |location|
+         @map.b_grid[location].ship == nil
+      end
+    elsif letter == 'C'
+      locations.all? do |location|
+         @map.c_grid[location].ship == nil
+      end
+    elsif letter == 'D'
+      locations.all? do |location|
+         @map.d_grid[location].ship == nil
+      end
+    end
+  end
 
   def valid_vertical_letter_pair(first_letter, second_letter)
     if first_letter == 'A' && second_letter == 'B'
