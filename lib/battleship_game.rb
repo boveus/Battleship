@@ -1,7 +1,9 @@
 class BattleshipGame
-  attr_reader   :map
+  attr_reader   :player_one_map,
+                :player_two_map
   def initialize
-    @map = Map.new
+    @player_one_map = Map.new
+    @player_two_map = Map.new
   end
 
   def main_menu
@@ -40,76 +42,76 @@ class BattleshipGame
   def add_two_unit_ship(first_letter, orientation, locations)
     ship = ship = Ship.new(2, orientation)
     if first_letter == 'A' && orientation == 'Horizontal'
-      @map.a_grid[locations[0]].add_ship(ship)
-      @map.a_grid[locations[1]].add_ship(ship)
+      @player_one_map.a_grid[locations[0]].add_ship(ship)
+      @player_one_map.a_grid[locations[1]].add_ship(ship)
     elsif first_letter == 'A' && orientation == 'Vertical'
-      @map.a_grid[locations[0]].add_ship(ship)
-      @map.b_grid[locations[1]].add_ship(ship)
+      @player_one_map.a_grid[locations[0]].add_ship(ship)
+      @player_one_map.b_grid[locations[1]].add_ship(ship)
     elsif first_letter == 'B' && orientation == 'Horizontal'
-      @map.b_grid[locations[0]].add_ship(ship)
-      @map.b_grid[locations[1]].add_ship(ship)
+      @player_one_map.b_grid[locations[0]].add_ship(ship)
+      @player_one_map.b_grid[locations[1]].add_ship(ship)
     elsif first_letter == 'B' && orientation == 'Vertical'
-      @map.b_grid[locations[0]].add_ship(ship)
-      @map.c_grid[locations[1]].add_ship(ship)
+      @player_one_map.b_grid[locations[0]].add_ship(ship)
+      @player_one_map.c_grid[locations[1]].add_ship(ship)
     elsif first_letter == 'C' && orientation == 'Horizontal'
-      @map.c_grid[locations[0]].add_ship(ship)
-      @map.c_grid[locations[1]].add_ship(ship)
+      @player_one_map.c_grid[locations[0]].add_ship(ship)
+      @player_one_map.c_grid[locations[1]].add_ship(ship)
     elsif first_letter == 'C' && orientation == 'Vertical'
-      @map.c_grid[locations[0]].add_ship(ship)
-      @map.d_grid[locations[1]].add_ship(ship)
+      @player_one_map.c_grid[locations[0]].add_ship(ship)
+      @player_one_map.d_grid[locations[1]].add_ship(ship)
     elsif first_letter == 'D' && orientation == 'Horizontal'
-      @map.a_grid[locations[0]].add_ship(ship)
-      @map.a_grid[locations[1]].add_ship(ship)
+      @player_one_map.a_grid[locations[0]].add_ship(ship)
+      @player_one_map.a_grid[locations[1]].add_ship(ship)
     end
   end
 
   def add_three_unit_ship(first_letter, orientation, locations)
     ship = ship = Ship.new(3, orientation)
     if first_letter == 'A' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter)
-      @map.a_grid[locations[0]].add_ship(ship)
-      @map.a_grid[locations[1]].add_ship(ship)
-      @map.a_grid[locations[2]].add_ship(ship)
+      @player_one_map.a_grid[locations[0]].add_ship(ship)
+      @player_one_map.a_grid[locations[1]].add_ship(ship)
+      @player_one_map.a_grid[locations[2]].add_ship(ship)
     elsif first_letter == 'A' && orientation == 'Vertical'
-      @map.a_grid[locations[0]].add_ship(ship)
-      @map.b_grid[locations[1]].add_ship(ship)
-      @map.c_grid[locations[2]].add_ship(ship)
+      @player_one_map.a_grid[locations[0]].add_ship(ship)
+      @player_one_map.b_grid[locations[1]].add_ship(ship)
+      @player_one_map.c_grid[locations[2]].add_ship(ship)
     elsif first_letter == 'B' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter)
-      @map.b_grid[locations[0]].add_ship(ship)
-      @map.b_grid[locations[1]].add_ship(ship)
-      @map.b_grid[locations[2]].add_ship(ship)
+      @player_one_map.b_grid[locations[0]].add_ship(ship)
+      @player_one_map.b_grid[locations[1]].add_ship(ship)
+      @player_one_map.b_grid[locations[2]].add_ship(ship)
     elsif first_letter == 'B' && orientation == 'Vertical'
-      @map.b_grid[locations[0]].add_ship(ship)
-      @map.c_grid[locations[1]].add_ship(ship)
-      @map.d_grid[locations[2]].add_ship(ship)
+      @player_one_map.b_grid[locations[0]].add_ship(ship)
+      @player_one_map.c_grid[locations[1]].add_ship(ship)
+      @player_one_map.d_grid[locations[2]].add_ship(ship)
     elsif first_letter == 'C' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter)
-      @map.c_grid[locations[0]].add_ship(ship)
-      @map.c_grid[locations[1]].add_ship(ship)
-      @map.c_grid[locations[2]].add_ship(ship)
+      @player_one_map.c_grid[locations[0]].add_ship(ship)
+      @player_one_map.c_grid[locations[1]].add_ship(ship)
+      @player_one_map.c_grid[locations[2]].add_ship(ship)
     elsif first_letter == 'C' && orientation == 'Vertical'
         #invalid for 4x4
     elsif first_letter == 'D' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter)
-      @map.d_grid[locations[0]].add_ship(ship)
-      @map.d_grid[locations[1]].add_ship(ship)
-      @map.d_grid[locations[2]].add_ship(ship)
+      @player_one_map.d_grid[locations[0]].add_ship(ship)
+      @player_one_map.d_grid[locations[1]].add_ship(ship)
+      @player_one_map.d_grid[locations[2]].add_ship(ship)
     end
   end
 
   def check_horizontal_for_ship(locations, letter)
     if letter == 'A'
     locations.all? do |location|
-       @map.a_grid[location].ship == nil
+       @player_one_map.a_grid[location].ship == nil
     end
     elsif letter == 'B'
       locations.all? do |location|
-         @map.b_grid[location].ship == nil
+         @player_one_map.b_grid[location].ship == nil
       end
     elsif letter == 'C'
       locations.all? do |location|
-         @map.c_grid[location].ship == nil
+         @player_one_map.c_grid[location].ship == nil
       end
     elsif letter == 'D'
       locations.all? do |location|
-         @map.d_grid[location].ship == nil
+         @player_one_map.d_grid[location].ship == nil
       end
     end
   end
