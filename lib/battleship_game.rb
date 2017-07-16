@@ -62,7 +62,7 @@ class BattleshipGame
       @map.c_grid[locations[1]].add_ship(ship)
     elsif first_letter == 'C' && orientation == 'Vertical'
       @map.c_grid[locations[0]].add_ship(ship)
-      @map.c_grid[locations[1]].add_ship(ship)
+      @map.d_grid[locations[1]].add_ship(ship)
     elsif first_letter == 'D' && orientation == 'Horizontal'
       @map.a_grid[locations[0]].add_ship(ship)
       @map.a_grid[locations[1]].add_ship(ship)
