@@ -70,4 +70,22 @@ class BattleshipGameTest < Minitest::Test
     assert_nil @game.map.a_grid['A1'].ship
     assert_nil @game.map.b_grid['B3'].ship
   end
+
+  def test_ship_getting_hit
+    @game.set_two_unit_ship_location('A1 A2')
+    @game.map.a_grid['A1'].ship.hit
+
+    assert_equal 1, @game.map.a_grid['A1'].ship.health
+    assert_equal 1, @game.map.a_grid['A2'].ship.health
+  end
+
+  def test_ship_can_sink
+    @game.set_two_unit_ship_location('A1 A2')
+    @game.map.a_grid['A1'].ship.hit
+    @game.map.a_grid['A2'].ship.hit
+
+    assert @game.map.a_grid['A1'].ship.is_sunken?
+    assert @game.map.a_grid['A2'].ship.is_sunken?
+  end
+
 end
