@@ -41,7 +41,7 @@ class BattleshipGame
     if valid && locations.count == 2
       add_two_unit_ship(first_letter, orientation, locations, map)
     elsif valid && locations.count == 3
-      add_three_unit_ship(first_letter, orientation, locations, map)
+      add_three_unit_ship(first_letter, first_number, orientation, locations, map)
     end
   end
 
@@ -71,13 +71,13 @@ class BattleshipGame
     end
   end
 
-  def add_three_unit_ship(first_letter, orientation, locations, map)
+  def add_three_unit_ship(first_letter, first_number, orientation, locations, map)
     ship = ship = Ship.new(3, orientation)
     if first_letter == 'A' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter, map)
       map.a_grid[locations[0]].add_ship(ship)
       map.a_grid[locations[1]].add_ship(ship)
       map.a_grid[locations[2]].add_ship(ship)
-    elsif first_letter == 'A' && orientation == 'Vertical'
+    elsif first_letter == 'A' && orientation == 'Vertical' && check_vertical_for_ship(locations, number, first_number, first_letter, map)
       map.a_grid[locations[0]].add_ship(ship)
       map.b_grid[locations[1]].add_ship(ship)
       map.c_grid[locations[2]].add_ship(ship)
@@ -85,7 +85,7 @@ class BattleshipGame
       map.b_grid[locations[0]].add_ship(ship)
       map.b_grid[locations[1]].add_ship(ship)
       map.b_grid[locations[2]].add_ship(ship)
-    elsif first_letter == 'B' && orientation == 'Vertical'
+    elsif first_letter == 'B' && orientation == 'Vertical' && check_vertical_for_ship(locations, first_number, first_letter, map)
       map.b_grid[locations[0]].add_ship(ship)
       map.c_grid[locations[1]].add_ship(ship)
       map.d_grid[locations[2]].add_ship(ship)
@@ -93,8 +93,6 @@ class BattleshipGame
       map.c_grid[locations[0]].add_ship(ship)
       map.c_grid[locations[1]].add_ship(ship)
       map.c_grid[locations[2]].add_ship(ship)
-    elsif first_letter == 'C' && orientation == 'Vertical'
-        #invalid for 4x4 with 3 unit ship
     elsif first_letter == 'D' && orientation == 'Horizontal' && check_horizontal_for_ship(locations, first_letter, map)
       map.d_grid[locations[0]].add_ship(ship)
       map.d_grid[locations[1]].add_ship(ship)
@@ -102,8 +100,12 @@ class BattleshipGame
     end
   end
 
-  def && check_vertical_for_ship(locations, letter, map)
-
+  def check_vertical_for_ship(locations, number, letter, map)
+    if letter == 'A'
+       map.a_grid[locations[0]].ship == nil && map.b_grid[locations[1]].ship == nil && map.c_grid[locations[2]].ship == nil
+    elsif letter == 'B'
+      map.b_grid[locations[0]].ship == nil && map.c_grid[locations[1]].ship == nil && map.d_grid[locations[2]].ship == nil
+    end
   end
 
   def check_horizontal_for_ship(locations, letter, map)
@@ -178,7 +180,7 @@ class BattleshipGame
   end
 
   def convert_location(location)
-    location = location.split(' ')
+    location.split(' ').sort
   end
 
   def split_location_arguments(argument)
@@ -186,6 +188,4 @@ class BattleshipGame
     number = argument[1].to_i
     return letter, number
   end
-
-
 end

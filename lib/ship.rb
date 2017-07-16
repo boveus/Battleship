@@ -3,6 +3,7 @@ class Ship
   attr_reader     :length,
                   :orientation,
                   :health
+
   def initialize(length, orientation)
     @length = length
     @orientation = orientation
