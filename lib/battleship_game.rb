@@ -75,7 +75,7 @@ class BattleshipGame
     valid, orientation = validate_location_three_unit(location)
     if valid
       ship = Ship.new(3, orientation)
-      ship_list << ship
+      ship_list.push(ship)
       add_three_unit_ship(first_letter, first_number, orientation, locations, map, ship)
     end
   end
@@ -110,7 +110,7 @@ class BattleshipGame
       map.a_grid[locations[0]].add_ship(ship)
       map.a_grid[locations[1]].add_ship(ship)
       map.a_grid[locations[2]].add_ship(ship)
-    elsif first_letter == 'A' && orientation == 'Vertical' && check_vertical_for_ship(locations, number, first_number, first_letter, map)
+    elsif first_letter == 'A' && orientation == 'Vertical' && check_vertical_for_ship(locations, first_number, first_letter, map)
       map.a_grid[locations[0]].add_ship(ship)
       map.b_grid[locations[1]].add_ship(ship)
       map.c_grid[locations[2]].add_ship(ship)
