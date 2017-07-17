@@ -44,7 +44,7 @@ class BattleshipGame
     "Farewell and following seas!"
   end
 
-  def set_ship_location(location, player, map = '')
+  def set_two_unit_ship_location(location, player, map = '')
     if player == 'Player1'
       map = @player_one_map
       ship_list = @player_one_ships
@@ -59,7 +59,21 @@ class BattleshipGame
       ship = Ship.new(2, orientation)
       ship_list << ship
       add_two_unit_ship(first_letter, orientation, locations, map, ship)
-    elsif valid && locations.count == 3
+    end
+  end
+
+  def set_three_unit_ship_location(location, player, map = '')
+    if player == 'Player1'
+      map = @player_one_map
+      ship_list = @player_one_ships
+    elsif player == 'Player2'
+      map = @player_two_map
+      ship_list = @player_one_ships
+    end
+    locations = convert_location(location)
+    first_letter, first_number = split_location_arguments(locations[0])
+    valid, orientation = validate_location_three_unit(location)
+    if valid
       ship = Ship.new(3, orientation)
       ship_list << ship
       add_three_unit_ship(first_letter, first_number, orientation, locations, map, ship)
@@ -158,12 +172,13 @@ class BattleshipGame
   end
 
   def valid_horizontal_number_pair(first_number, second_number)
-    if first_number == second_number - 1 && first_number < 4
-      true
-    elsif second_number == first_number - 1 && second_number < 4
-      true
-    end
+    first_number == second_number - 1 && first_number < 4
   end
+
+  def valid_horizontal_three_number(first_number, second_number, third_number)
+    first_number == second_number - 1 && second_number == third_number - 1 && first_number < 3
+  end
+
 
   def validate_location_two_unit(location)
     locations = location.split(' ')
@@ -181,7 +196,7 @@ class BattleshipGame
     first_letter, first_number = split_location_arguments(locations[0])
     second_letter, second_number = split_location_arguments(locations[1])
     third_letter, third_number = split_location_arguments(locations[2])
-    if first_letter == second_letter && valid_horizontal_number_pair(first_number, second_number)
+    if first_letter == second_letter && valid_horizontal_three_number(first_number, second_number, third_number)
       return true, 'Horizontal'
     elsif valid_vertical_letter_pair(first_letter, second_letter) && three_numbers_valid(first_number, second_number, third_number)
       return true, 'Vertical'
