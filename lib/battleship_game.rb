@@ -18,7 +18,7 @@ class BattleshipGame
   end
 
   def main_menu
-    puts "Welcome to BATTLESHIP\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    "Welcome to BATTLESHIP\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
 
   def play
@@ -28,20 +28,20 @@ class BattleshipGame
     play_prompt_ln4 = "\nsecond is three units long."
     play_prompt_ln5 = "\nThe grid has A1 at the top left and D4 at the bottom right."
     play_prompt_ln6 = "\nEnter the squares for the two-unit ship: "
-    puts play_prompt_ln1 + play_prompt_ln2 + play_prompt_ln3 + play_prompt_ln4 + play_prompt_ln5 + play_prompt_ln6
+    play_prompt_ln1 + play_prompt_ln2 + play_prompt_ln3 + play_prompt_ln4 + play_prompt_ln5 + play_prompt_ln6
   end
 
   def prompt_place_second_ship
-    puts "Please enter the squares for your three-unit ship: "
+    "Please enter the squares for your three-unit ship: "
   end
 
 
   def instructions
-    puts "A short explaination on how the game is played."
+    "A short explaination on how the game is played."
   end
 
   def quit
-    puts "Farewell and following seas!"
+    "Farewell and following seas!"
   end
 
   def set_ship_location(location, player, map = '')
