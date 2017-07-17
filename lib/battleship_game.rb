@@ -43,13 +43,43 @@ class BattleshipGame
     "Farewell and following seas!"
   end
 
+  def set_up_computer_ships(player)
+    if player == 'Player1'
+      ships = @player_one_ships
+    elsif player == 'Player2'
+      ships = @player_two_ships
+    end
+    two_ship_location = randomize(2)
+    set_two_unit_ship_location(two_ship_location, player)
+    three_ship_location = randomize(3)
+    set_three_unit_ship_location(three_ship_location, player)
+    if ships.length == 1
+      set_up_computer_ships(player)
+    elsif ships.length == 2
+      return
+    end
+  end
+
+  def randomize(number)
+    valid_two_ship_locations = ['A1 A2', 'A2 A3', 'C3 C4' 'A3 A4', 'B1 B2', 'B3 B4', 'C2 C3']
+    valid_three_ship_locations = ['B1 C1 D1', 'A1 A2 A3', 'A4 B4 C4', 'B2 C2 D2', 'D1 D2 D3', 'C1 C2 C3', 'A3 B3 C3']
+    if number == 2
+      valid_two_ship_locations[rand 0..6]
+    elsif number == 3
+      valid_three_ship_locations[rand 0..6]
+    end
+  end
+
+
+
+
   def set_two_unit_ship_location(location, player, map = '')
     if player == 'Player1'
       map = @player_one_map
       ship_list = @player_one_ships
     elsif player == 'Player2'
       map = @player_two_map
-      ship_list = @player_one_ships
+      ship_list = @player_two_ships
     end
     if check_two_unit_positions(location) == 0
       locations = convert_location(location)
@@ -70,7 +100,7 @@ class BattleshipGame
       ship_list = @player_one_ships
     elsif player == 'Player2'
       map = @player_two_map
-      ship_list = @player_one_ships
+      ship_list = @player_two_ships
     end
     if check_three_unit_positions(location) == 0
       locations = convert_location(location)
@@ -111,8 +141,8 @@ class BattleshipGame
       map.d_grid[locations[1]].add_ship(ship)
       ship_list.push(ship)
     elsif first_letter == 'D' && orientation == 'Horizontal'
-      map.a_grid[locations[0]].add_ship(ship)
-      map.a_grid[locations[1]].add_ship(ship)
+      map.d_grid[locations[0]].add_ship(ship)
+      map.d_grid[locations[1]].add_ship(ship)
       ship_list.push(ship)
     end
   end

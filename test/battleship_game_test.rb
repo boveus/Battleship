@@ -134,4 +134,12 @@ class BattleshipGameTest < Minitest::Test
 
     assert_equal 0, @game.player_one_total_health
   end
+
+  def test_setting_computer_ships
+    @game.set_up_computer_ships('Player1')
+    @game.set_up_computer_ships('Player2')
+
+    refute @game.player_one_total_health == 0
+    refute @game.player_two_total_health == 0
+  end
 end
