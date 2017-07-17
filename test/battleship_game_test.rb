@@ -142,4 +142,34 @@ class BattleshipGameTest < Minitest::Test
     refute @game.player_one_total_health == 0
     refute @game.player_two_total_health == 0
   end
+
+  def test_player_fire_shot
+    @game.set_two_unit_ship_location('A1 A2', 'Player2')
+
+    @game.player_fire_shot('A1')
+    @game.player_fire_shot('A2')
+
+    assert @game.player_two_map.a_grid['A1'].ship.is_sunken?
+  end
+
+  def test_player_fire_shot_invalid_args
+    @game.set_two_unit_ship_location('A1 A2', 'Player2')
+
+    @game.player_fire_shot('A1')
+    # binding.pry
+    result = @game.player_fire_shot('A33')
+
+    refute @game.player_two_map.a_grid['A1'].ship.is_sunken?
+    assert_equal "Please enter a valid tile to fire upon.", result
+  end
+
+  def test_player_fire_shot_repeat_hit
+    @game.set_two_unit_ship_location('A1 A2', 'Player2')
+
+    @game.player_fire_shot('A1')
+    result = @game.player_fire_shot('A1')
+
+    refute @game.player_two_map.a_grid['A1'].ship.is_sunken?
+    assert_equal "You already fired at that space.", result
+  end
 end

@@ -293,4 +293,31 @@ class BattleshipGame
   def player_two_total_health
     player_total_ship_health(@player_two_ships)
   end
+
+  def check_tile_valid_firing_location(tile)
+    tile =~ /[A-D][1-4]$/
+  end
+
+  def player_fire_shot(tile)
+    if check_tile_valid_firing_location(tile) == nil
+      return "Please enter a valid tile to fire upon."
+    end
+    if tile[0] == 'A'
+      grid = @player_two_map.a_grid
+    elsif tile[0] == 'B'
+      grid = @player_two_map.b_grid
+    elsif tile[0] == 'C'
+      grid = @player_two_map.c_grid
+    elsif tile[0] == 'D'
+      grid = @player_two_map.d_grid
+    end
+    result = grid[tile].tile_hit
+    if result == true
+      return "You hit the enemy ship!"
+    elsif result == false
+      return "You missed."
+    elsif result == 'Invalid'
+      return "You already fired at that space."
+    end
+  end
 end
