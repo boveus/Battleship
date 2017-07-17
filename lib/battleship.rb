@@ -1,18 +1,19 @@
-class Battleship
-  def initialize
-    @game = BattleshipGame.new
+require './lib/battleship_game'
+
+  game = BattleshipGame.new
+  game.main_menu
+  while (input = gets.chomp)
+    break if input.upcase == 'Q'
+    if input.upcase == 'I'
+      game.instructions
+    elsif input.upcase == 'P'
+      game.play
+      input = gets.chomp
+      game.set_ship_location(input, 'Player1')
+      game.prompt_place_second_ship
+      input = gets.chomp
+      game.set_ship_location(input, 'Player1')
+      print game.player_two_total_health
+    end
   end
-
-  # this class will need to validate user selections
-  # such as ship cords / menu selections
-
-# while guess != number
-#   puts "I have generated a random number for you to guess, what is your guess?"
-#   guess = gets.chomp
-# if guess.is_i? == true
-#   if guess.to_i < number then puts "Your guess is lower than the number"
-#   guesscounter = guesscounter + 1
-#   else puts "Your guess is greater than the number"
-#   guesscounter = guesscounter + 1
-#   end
-end
+  game.quit
