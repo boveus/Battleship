@@ -6,15 +6,14 @@ class BattleshipGame
   attr_reader   :player_one_map,
                 :player_two_map,
                 :player_one_total_health,
-                :player_two_total_health
+                :player_two_total_health,
+                :player_one_ships
 
   def initialize
     @player_one_map = Map.new
     @player_two_map = Map.new
     @player_one_ships = []
     @player_two_ships = []
-    @player_one_total_health = player_total_ship_health(@player_one_ships)
-    @player_two_total_health = player_total_ship_health(@player_two_ships)
   end
 
   def main_menu
@@ -228,5 +227,14 @@ class BattleshipGame
       total += ship.health
     end
     total
+  end
+
+
+  def player_one_total_health
+    player_total_ship_health(@player_one_ships)
+  end
+
+  def player_two_total_health
+    player_total_ship_health(@player_two_ships)
   end
 end

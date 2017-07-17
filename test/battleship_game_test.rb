@@ -133,6 +133,5 @@ class BattleshipGameTest < Minitest::Test
     @game.player_one_map.b_grid['B3'].ship.hit
 
     assert_equal 0, @game.player_one_total_health
-    # assert_equal 3, @game.player_one_map.b_grid['B1'].ship.health
   end
 end
