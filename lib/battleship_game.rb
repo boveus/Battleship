@@ -249,11 +249,11 @@ class BattleshipGame
   end
 
   def check_three_unit_positions(location)
-    location =~ /[A-D][1-4]\s[A-D][1-4]\s[A-D][1-4]/
+    location =~ /[A-D][1-4]\s[A-D][1-4]\s[A-D][1-4]$/
   end
 
   def check_two_unit_positions(location)
-    location =~ /[A-D][1-4]\s[A-D][1-4]/
+    location =~ /[A-D][1-4]\s[A-D][1-4]$/
   end
 
   def player_one_total_health
