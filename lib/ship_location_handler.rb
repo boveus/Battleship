@@ -24,7 +24,7 @@ class ShipLocationHandler
     three_ship_location = randomize(3)
     set_three_unit_ship_location(three_ship_location, @computer_player)
     if ships.length == 1
-      set_up_computer_ships(@computer_player)
+      set_up_computer_ships
     elsif ships.length == 2
       return
     end
