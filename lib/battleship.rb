@@ -23,16 +23,16 @@ require './lib/battleship_game'
           puts "Please enter a valid ship location for your three unit ship."
       end
       while game.player_two_total_health > 0 && game.player_one_total_health > 0
+        if game.player_two_total_health == 0
+          print "YOU WIN"
+        elsif game.player_one_total_health == 0
+          print "YOU LOSE"
+        end
         if game.turn == 'Player1'
         game.player_firing_phase(game)
         elsif game.turn == 'Player2'
           puts game.computer_fire_shot
         end
-      end
-      if game.player_one_total_health > 0
-        print "YOU WIN"
-      else
-        print "YOU LOSE"
       end
     end
     game.quit
