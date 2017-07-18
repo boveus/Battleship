@@ -29,6 +29,11 @@ require './lib/battleship_game'
           puts game.computer_fire_shot
         end
       end
+      if game.player_one_total_health > 0
+        print "YOU WIN"
+      else
+        print "YOU LOSE"
+      end
     end
+    game.quit
   end
-  game.quit

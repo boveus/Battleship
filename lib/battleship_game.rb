@@ -349,12 +349,12 @@ class BattleshipGame
   end
 
   def player_firing_phase(game)
-    puts game.player_one_map.display
+    puts game.player_two_map.display
     puts "Please enter a firing solution: "
     input = gets.chomp
     result = game.player_fire_shot(input)
-    if result == "You already fired at that space."
-        puts result + "\n"
+    puts result + "\n"
+    if result == "You already fired at that space." || result == "Please enter a valid tile to fire upon."
         player_firing_phase(game)
     else
       @turn = 'Player2'

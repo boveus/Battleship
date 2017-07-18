@@ -42,6 +42,7 @@ class Map
       @d_grid[grid_value] = Tile.new
     end
   end
+  
   def display
     render_lines
     @border + @line1 + @line2 + @line3 + @line4 + @line5 + @bottom_border

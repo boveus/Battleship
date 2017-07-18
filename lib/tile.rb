@@ -29,7 +29,7 @@ class Tile
 
   def add_ship(ship)
     @ship = ship
-    set_icon('ship')
+    # set_icon('ship')
   end
 
   def set_icon(icon)
