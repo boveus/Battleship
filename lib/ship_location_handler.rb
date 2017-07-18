@@ -1,24 +1,30 @@
 class ShipLocationHandler
+  attr_reader   :player_one_total_health,
+                :player_two_total_health,
+                :player_one_map,
+                :player_two_map,
+                :player_one_ships
 
   def initialize(computer_player = 'Player2')
-  @computer_player = computer_player
-  @player_one_ships = []
-  @player_two_ships = []
+    @computer_player  = computer_player
+    @player_one_ships = []
+    @player_two_ships = []
+    @player_one_map = Map.new
+    @player_two_map = Map.new
   end
 
-
-  def set_up_computer_ships(player)
-    if player == 'Player1'
+  def set_up_computer_ships
+    if @computer_player == 'Player1'
       ships = @player_one_ships
-    elsif player == 'Player2'
+    elsif @computer_player == 'Player2'
       ships = @player_two_ships
     end
     two_ship_location = randomize(2)
-    set_two_unit_ship_location(two_ship_location, player)
+    set_two_unit_ship_location(two_ship_location, @computer_player)
     three_ship_location = randomize(3)
-    set_three_unit_ship_location(three_ship_location, player)
+    set_three_unit_ship_location(three_ship_location, @computer_player)
     if ships.length == 1
-      set_up_computer_ships(player)
+      set_up_computer_ships(@computer_player)
     elsif ships.length == 2
       return
     end
@@ -232,6 +238,14 @@ class ShipLocationHandler
     return letter, number
   end
 
+  def player_one_total_health
+    player_total_ship_health(@player_one_ships)
+  end
+
+  def player_two_total_health
+    player_total_ship_health(@player_two_ships)
+  end
+
   def player_total_ship_health(array, total = 0)
     array.each do |ship|
       total += ship.health
@@ -245,13 +259,5 @@ class ShipLocationHandler
 
   def check_two_unit_positions(location)
     location =~ /[A-D][1-4]\s[A-D][1-4]$/
-  end
-
-  def player_one_total_health
-    player_total_ship_health(@player_one_ships)
-  end
-
-  def player_two_total_health
-    player_total_ship_health(@player_two_ships)
   end
 end
