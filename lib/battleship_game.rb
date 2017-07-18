@@ -299,7 +299,7 @@ class BattleshipGame
   end
 
   def computer_choose_random_tile
-    @computer_tile_choices = @computer_tile_choices.shuffle
+    @computer_tile_choices.shuffle!
     @computer_tile_choices.pop
   end
 
