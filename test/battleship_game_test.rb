@@ -156,7 +156,6 @@ class BattleshipGameTest < Minitest::Test
     @game.set_two_unit_ship_location('A1 A2', 'Player2')
 
     @game.player_fire_shot('A1')
-    # binding.pry
     result = @game.player_fire_shot('A33')
 
     refute @game.player_two_map.a_grid['A1'].ship.is_sunken?

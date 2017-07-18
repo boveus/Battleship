@@ -23,11 +23,12 @@ require './lib/battleship_game'
           puts "Please enter a valid ship location for your three unit ship."
       end
       while game.player_two_total_health > 0 && game.player_one_total_health > 0
-        puts game.player_two_map.display
-        puts "Please enter a firing solution: "
-        input = gets.chomp
-        puts game.player_fire_shot(input)
-
+        if game.turn == 'Player1'
+        game.player_firing_phase(game)
+        elsif game.turn == 'Player2'
+          puts game.computer_fire_shot
+        end
+      end
     end
   end
   game.quit

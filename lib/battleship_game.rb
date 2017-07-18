@@ -7,13 +7,16 @@ class BattleshipGame
                 :player_two_map,
                 :player_one_total_health,
                 :player_two_total_health,
-                :player_one_ships
+                :player_one_ships,
+                :turn
 
   def initialize
     @player_one_map = Map.new
     @player_two_map = Map.new
     @player_one_ships = []
     @player_two_ships = []
+    @computer_tile_choices = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
+    @turn = 'Player1'
   end
 
   def main_menu
@@ -69,9 +72,6 @@ class BattleshipGame
       valid_three_ship_locations[rand 0..6]
     end
   end
-
-
-
 
   def set_two_unit_ship_location(location, player, map = '')
     if player == 'Player1'
@@ -298,7 +298,34 @@ class BattleshipGame
     tile =~ /[A-D][1-4]$/
   end
 
-  def player_fire_shot(tile)
+  def computer_choose_random_tile
+    @computer_tile_choices = @computer_tile_choices.shuffle
+    @computer_tile_choices.pop
+  end
+
+  def computer_fire_shot
+    tile = computer_choose_random_tile
+    if tile[0] == 'A'
+      grid = @player_one_map.a_grid
+    elsif tile[0] == 'B'
+      grid = @player_one_map.b_grid
+    elsif tile[0] == 'C'
+      grid = @player_one_map.c_grid
+    elsif tile[0] == 'D'
+      grid = @player_one_map.d_grid
+    end
+    result = grid[tile].tile_hit
+    if result == true
+      @turn = 'Player1'
+      return "The enemy hit your ship!"
+    else
+      @turn = 'Player1'
+      return "The enemy missed your ships!"
+    end
+  end
+
+
+  def player_fire_shot(tile, player = 'Player1')
     if check_tile_valid_firing_location(tile) == nil
       return "Please enter a valid tile to fire upon."
     end
@@ -318,6 +345,19 @@ class BattleshipGame
       return "You missed."
     elsif result == 'Invalid'
       return "You already fired at that space."
+    end
+  end
+
+  def player_firing_phase(game)
+    puts game.player_one_map.display
+    puts "Please enter a firing solution: "
+    input = gets.chomp
+    result = game.player_fire_shot(input)
+    if result == "You already fired at that space."
+        puts result + "\n"
+        player_firing_phase(game)
+    else
+      @turn = 'Player2'
     end
   end
 end
