@@ -123,6 +123,13 @@ class BattleshipGameTest < Minitest::Test
     assert_instance_of Ship, @game.player_one_map.b_grid['B1'].ship
   end
 
+  def test_player_one_total_health
+    @game.set_two_unit_ship_location('A1 A2', 'Player1')
+    @game.set_three_unit_ship_location('B1 B2 B3', 'Player1')
+
+    assert_equal 5, @game.player_one_total_health
+  end
+
   def test_sinking_all_the_ships
     @game.set_two_unit_ship_location('A1 A2', 'Player1')
     @game.set_three_unit_ship_location('B1 B2 B3', 'Player1')
