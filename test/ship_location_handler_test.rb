@@ -37,11 +37,15 @@ class ShipLocationHandlerTest < Minitest::Test
 
   def test_check_three_unit_positions
     test_1 = @handler.check_two_unit_positions('A1 A2')
+    test_2 = @handler.check_two_unit_positions('A1 A2 A3')
     assert_equal 0, test_1
+    refute_equal 0, test_2
   end
 
   def test_check_two_unit_positions
-    test_1 = @handler.check_three_unit_positions('A1 A2 A3')
-    assert_equal 0, test_1
+    test_1 = @handler.check_three_unit_positions('A1 A2')
+    test_2 = @handler.check_three_unit_positions('A1 A2 A3')
+    refute_equal 0, test_1
+    assert_equal 0, test_2
   end
 end
