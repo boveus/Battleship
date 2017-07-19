@@ -10,6 +10,7 @@ require './lib/battleship_game'
       game.ship_locations.set_up_computer_ships
       puts game.play
       while game.ship_locations.player_one_ships.length == 0
+      break if input.upcase == 'Q'
         input = gets.chomp
         game.ship_locations.set_two_unit_ship_location(input, 'Player1')
         break if game.ship_locations.player_one_ships.length == 1
@@ -17,23 +18,27 @@ require './lib/battleship_game'
       end
       puts game.prompt_place_second_ship
       while game.ship_locations.player_one_ships.length == 1
-        input = gets.chomp
-        game.ship_locations.set_three_unit_ship_location(input, 'Player1')
-        break if game.ship_locations.player_one_ships.length == 2
-          puts "Please enter a valid ship location for your three unit ship."
+        break if input.upcase == 'Q'
+          input = gets.chomp
+          game.ship_locations.set_three_unit_ship_location(input, 'Player1')
+          break if game.ship_locations.player_one_ships.length == 2
+            puts "Please enter a valid ship location for your three unit ship."
       end
-      while game.ship_locations.player_two_total_health > 0 && game.ship_locations.player_one_total_health > 0
-        if game.ship_locations.player_two_total_health == 0
-          print "YOU WIN"
-        elsif game.ship_locations.player_one_total_health == 0
+      while game.turn != 'Over'
+        if game.ship_locations.player_one_total_health == 0
           print "YOU LOSE"
-        end
-        if game.turn == 'Player1'
-        game.player_firing_phase
+          game.over
+          break
+        elsif game.turn == 'Player1'
+          game.player_firing_phase
+        elsif game.ship_locations.player_two_total_health == 0
+          print "YOU WIN"
+          game.over
+          break
         elsif game.turn == 'Player2'
           puts game.computer_fire_shot
         end
       end
+      game.quit
     end
-    game.quit
   end

@@ -108,4 +108,8 @@ class BattleshipGame
       @turn = 'Player2'
     end
   end
+
+  def over
+    @turn = 'Over'
+  end
 end
