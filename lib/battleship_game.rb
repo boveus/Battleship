@@ -16,6 +16,33 @@ class BattleshipGame
     @player_shot_counter = 0
   end
 
+  def player_one_has_set_three_unit_ship
+    @ship_locations.player_one_ships.length == 2
+  end
+
+  def player_one_has_set_two_unit_ship
+    @ship_locations.player_one_ships.length == 1
+  end
+
+  def set_three_unit_ship(input, player)
+    ship_locations.set_three_unit_ship_location(input, player)
+  end
+
+  def player_one_hasnt_set_ship_two
+    game.ship_locations.player_one_ships.length  == 1
+  end
+
+  def player_one_hasnt_set_ship_one
+    @ship_locations.player_one_ships.length == 0
+  end
+
+  def set_up_computer_ships
+    @ship_locations.set_up_computer_ships
+  end
+
+  def set_two_unit_ship(input, player)
+    @ship_locations.set_two_unit_ship_location(input, player)
+  end
   def player_one_wins
     @ship_locations.player_two_total_health == 0
   end

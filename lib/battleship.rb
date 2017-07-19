@@ -7,21 +7,21 @@ require './lib/battleship_game'
     if input.upcase == 'I'
       puts game.instructions
     elsif input.upcase == 'P'
-      game.ship_locations.set_up_computer_ships
+      game.set_up_computer_ships
       puts game.play
-      while game.ship_locations.player_one_ships.length == 0
+      while game.player_one_hasnt_set_ship_one
       break if input.upcase == 'Q'
         input = gets.chomp
-        game.ship_locations.set_two_unit_ship_location(input, 'Player1')
-        break if game.ship_locations.player_one_ships.length == 1
+        game.set_two_unit_ship(input, 'Player1')
+        break if game.player_one_has_set_two_unit_ship
           puts "Please enter a valid ship location for your two unit ship."
       end
       puts game.prompt_place_second_ship
-      while game.ship_locations.player_one_ships.length == 1
+      while game.player_one_has_set_two_unit_ship
         break if input.upcase == 'Q'
           input = gets.chomp
-          game.ship_locations.set_three_unit_ship_location(input, 'Player1')
-          break if game.ship_locations.player_one_ships.length == 2
+          game.set_three_unit_ship(input, 'Player1')
+          break if game.player_one_has_set_three_unit_ship
             puts "Please enter a valid ship location for your three unit ship."
       end
       while game.turn != 'Over'
