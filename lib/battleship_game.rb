@@ -16,6 +16,14 @@ class BattleshipGame
     @player_shot_counter = 0
   end
 
+  def player_one_wins
+    @ship_locations.player_two_total_health == 0
+  end
+
+  def player_two_wins
+      @ship_locations.player_one_total_health == 0
+  end
+
   def main_menu
     "Welcome to BATTLESHIP\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
@@ -31,7 +39,7 @@ class BattleshipGame
   end
 
   def print_player_shots
-    "It took you #{@player_shot_counter} number of shots to defeat the enemy."
+    "It took you #{@player_shot_counter} shots to defeat the enemy."
   end
 
   def prompt_place_second_ship
@@ -79,7 +87,7 @@ class BattleshipGame
 
 
   def player_fire_shot(tile, player = 'Player1')
-    if check_tile_valid_firing_location(tile) == nil
+    if !check_tile_valid_firing_location(tile)
       return "Please enter a valid tile to fire upon."
     end
     if tile[0] == 'A'
@@ -101,15 +109,49 @@ class BattleshipGame
     end
   end
 
+  def check_if_player_one_ship_is_sunken
+    ship = check_if_ship_is_sunken(@ship_locations.player_one_ships)
+    if ship && ship.length == 2
+      puts "The computer sank your Patrol Boat!\n"
+      @ship_locations.player_one_ships -= [ship]
+    elsif ship && ship.length == 3
+      puts "The computer sank your Battleship!\n"
+      @ship_locations.player_one_ships-= [ship]
+    end
+
+  end
+
+  def check_if_player_two_ship_is_sunken
+    ship = check_if_ship_is_sunken(@ship_locations.player_two_ships)
+    if ship && ship.length == 2
+      puts "You sank the computer\'s Patrol Boat\n"
+      @ship_locations.player_two_ships -= [ship]
+    elsif ship && ship.length == 3
+      puts "You sank the computer\'s Battleship!\n"
+      @ship_locations.player_two_ships -= [ship]
+    end
+  end
+
+  def check_if_ship_is_sunken(player_ships, value = false)
+    player_ships.each do |ship|
+      if ship.is_sunken?
+        value = ship
+      end
+    end
+    value
+  end
+
   def player_firing_phase
     puts @ship_locations.player_two_map.display
     puts "Please enter a firing solution: "
     input = gets.chomp
     result = player_fire_shot(input)
+    check_if_player_one_ship_is_sunken
     puts result + "\n"
     if result == "You already fired at that space." || result == "Please enter a valid tile to fire upon."
         player_firing_phase
     else
+      check_if_player_two_ship_is_sunken
       @player_shot_counter += 1
       @turn = 'Player2'
     end

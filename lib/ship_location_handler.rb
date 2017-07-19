@@ -2,8 +2,10 @@ class ShipLocationHandler
   attr_reader   :player_one_total_health,
                 :player_two_total_health,
                 :player_one_map,
-                :player_two_map,
-                :player_one_ships
+                :player_two_map
+
+  attr_accessor :player_one_ships,
+                :player_two_ships
 
   def initialize(computer_player = 'Player2')
     @computer_player  = computer_player
@@ -19,11 +21,13 @@ class ShipLocationHandler
     elsif @computer_player == 'Player2'
       ships = @player_two_ships
     end
-    two_ship_location = randomize(2)
-    set_two_unit_ship_location(two_ship_location, @computer_player)
-    three_ship_location = randomize(3)
-    set_three_unit_ship_location(three_ship_location, @computer_player)
-    if ships.length == 1
+    if ships.length == 0
+      two_ship_location = randomize(2)
+      set_two_unit_ship_location(two_ship_location, @computer_player)
+      set_up_computer_ships
+    elsif ships.length == 1
+      three_ship_location = randomize(3)
+      set_three_unit_ship_location(three_ship_location, @computer_player)
       set_up_computer_ships
     elsif ships.length == 2
       return
@@ -251,9 +255,6 @@ class ShipLocationHandler
     player_total_ship_health(@player_two_ships)
   end
 
-  def player_ship_is_sunken
-    #if ship.is_sunken?  return you sank "player1 || computer?? 2-tile ship"
-  end
 
   def player_total_ship_health(array, total = 0)
     array.each do |ship|
