@@ -67,3 +67,7 @@ C3 D3      D3 C3
 INVALID
 
 A1 A3        A1 B3      A2 D2
+
+
+add the counter for number of shots,
+also add the info about when a ship has been sunken.
