@@ -251,6 +251,10 @@ class ShipLocationHandler
     player_total_ship_health(@player_two_ships)
   end
 
+  def player_ship_is_sunken
+    #if ship.is_sunken?  return you sank "player1 || computer?? 2-tile ship"
+  end
+
   def player_total_ship_health(array, total = 0)
     array.each do |ship|
       total += ship.health

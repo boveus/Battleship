@@ -13,6 +13,7 @@ class BattleshipGame
     @computer_tile_choices = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
     @turn = 'Player1'
     @ship_locations = ShipLocationHandler.new
+    @player_shot_counter = 0
   end
 
   def main_menu
@@ -27,6 +28,10 @@ class BattleshipGame
     play_prompt_ln5 = "\nThe grid has A1 at the top left and D4 at the bottom right."
     play_prompt_ln6 = "\nEnter the squares for the two-unit ship: "
     play_prompt_ln1 + play_prompt_ln2 + play_prompt_ln3 + play_prompt_ln4 + play_prompt_ln5 + play_prompt_ln6
+  end
+
+  def print_player_shots
+    "It took you #{@player_shot_counter} number of shots to defeat the enemy."
   end
 
   def prompt_place_second_ship
@@ -105,6 +110,7 @@ class BattleshipGame
     if result == "You already fired at that space." || result == "Please enter a valid tile to fire upon."
         player_firing_phase
     else
+      @player_shot_counter += 1
       @turn = 'Player2'
     end
   end

@@ -33,6 +33,7 @@ require './lib/battleship_game'
           game.player_firing_phase
         elsif game.ship_locations.player_two_total_health == 0
           print "YOU WIN"
+          puts games.print_player_shots
           game.over
           break
         elsif game.turn == 'Player2'
