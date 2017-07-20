@@ -1,4 +1,3 @@
-require 'simplecov'
 require './lib/battleship_game'
 require 'minitest/autorun'
 require 'minitest/pride'
@@ -155,6 +154,15 @@ class BattleshipGameTest < Minitest::Test
     @game.player_fire_shot('A2')
 
     assert @game.ship_locations.player_two_map.a_grid['A1'].ship.is_sunken?
+  end
+
+  def test_player_miss_shot
+    @game.ship_locations.set_two_unit_ship_location('A3 A4', 'Player2')
+
+    @game.player_fire_shot('A1')
+    @game.player_fire_shot('A2')
+
+    assert @game.ship_locations.player_two_map.a_grid['A1'].opponent_miss
   end
 
   def test_player_fire_shot_invalid_args

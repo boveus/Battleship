@@ -1,4 +1,6 @@
 require './lib/tile'
+require 'simplecov'
+SimpleCov.start
 class Map
   # initialize map with new tile objects
   attr_reader      :a_grid,
@@ -42,7 +44,7 @@ class Map
       @d_grid[grid_value] = Tile.new
     end
   end
-  
+
   def display
     render_lines
     @border + @line1 + @line2 + @line3 + @line4 + @line5 + @bottom_border

@@ -1,4 +1,3 @@
-require 'simplecov'
 require './lib/map'
 require './lib/tile'
 require './lib/ship'
@@ -6,7 +5,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
 
-SimpleCov.start
 class MapTest < Minitest::Test
 
   def test_map_can_display

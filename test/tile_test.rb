@@ -1,11 +1,9 @@
-require 'simplecov'
 require './lib/tile'
 require './lib/ship'
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
 
-SimpleCov.start
 class TileTest < Minitest::Test
   def test_tile_is_wave_by_default
     tile = Tile.new
@@ -54,4 +52,6 @@ class TileTest < Minitest::Test
     tile.set_icon('explosion')
     assert_equal `echo "\xF0\x9F\x92\xA5"`.strip, tile.icon
   end
+
+
 end

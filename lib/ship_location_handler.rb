@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 class ShipLocationHandler
   attr_reader   :player_one_total_health,
                 :player_two_total_health,

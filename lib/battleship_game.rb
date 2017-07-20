@@ -2,6 +2,8 @@ require './lib/ship'
 require './lib/map'
 require './lib/tile'
 require './lib/ship_location_handler'
+require 'simplecov'
+SimpleCov.start
 
 class BattleshipGame
   attr_reader   :player_one_map,

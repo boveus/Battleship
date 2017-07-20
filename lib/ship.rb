@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 class Ship
 
   attr_reader     :length,

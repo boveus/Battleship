@@ -1,9 +1,7 @@
-require 'simplecov'
 require './lib/ship'
 require 'minitest/autorun'
 require 'minitest/pride'
 
-SimpleCov.start
 class ShipTest < Minitest::Test
   def test_ship_takes_length_initialize_argument
     ship = Ship.new(2, 'horizontal')
