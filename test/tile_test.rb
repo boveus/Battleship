@@ -2,7 +2,7 @@ require './lib/tile'
 require './lib/ship'
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'pry'
+
 
 class TileTest < Minitest::Test
   def test_tile_is_wave_by_default

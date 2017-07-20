@@ -1,8 +1,9 @@
-require './lib/tile'
 require 'simplecov'
 SimpleCov.start
+require './lib/tile'
+
+
 class Map
-  # initialize map with new tile objects
   attr_reader      :a_grid,
                    :b_grid,
                    :c_grid,

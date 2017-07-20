@@ -2,6 +2,7 @@ require './lib/ship_location_handler'
 require 'minitest/autorun'
 require 'minitest/pride'
 
+
 class ShipLocationHandlerTest < Minitest::Test
   def setup
     @handler = ShipLocationHandler.new

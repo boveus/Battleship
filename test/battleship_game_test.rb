@@ -2,7 +2,7 @@ require './lib/battleship_game'
 require 'minitest/autorun'
 require 'minitest/pride'
 
-SimpleCov.start
+
 class BattleshipGameTest < Minitest::Test
   def setup
     @game = BattleshipGame.new
