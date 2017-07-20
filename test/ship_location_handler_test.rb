@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require './lib/ship_location_handler'
 require 'minitest/autorun'
 require 'minitest/pride'

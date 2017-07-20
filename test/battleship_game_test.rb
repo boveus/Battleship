@@ -1,6 +1,9 @@
+require 'simplecov'
+SimpleCov.start
 require './lib/battleship_game'
 require 'minitest/autorun'
 require 'minitest/pride'
+
 
 
 class BattleshipGameTest < Minitest::Test

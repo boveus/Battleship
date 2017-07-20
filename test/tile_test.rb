@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require './lib/tile'
 require './lib/ship'
 require 'minitest/autorun'
