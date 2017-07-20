@@ -27,7 +27,17 @@ class BattleshipGameTest < Minitest::Test
   end
 
   def test_main_menu_instructions
-    instructions_prompt = "A short explaination on how the game is played."
+    instructions_ln1 = "The game will begin with setting your two tile ship on the grid.\n"
+    instructions_ln2 = "The next step will be placing your three tile ship on the grid\n"
+    instructions_ln3 = "You must enter your ship coordinates in the following format <A1 B1>\n"
+    instructions_ln4 = "The coordinates must also line up in a straight line. Once your ships\n"
+    instructions_ln5 = "have been placed, you will be prompted to fire at your opponent's\n"
+    instructions_ln6 = "ships. To win, you must sink your opponent's ships before they sink yours.\n"
+    instructions_ln7 = "Your hits and misses will be indicated by the following icons\n"
+    instructions_ln8 = "A hit is denoated with the fire icon: " + `echo "\xF0\x9F\x94\xA5"`.strip + "\n"
+    instructions_ln9 = "A miss is donated with an explosion icon: " + `echo "\xF0\x9F\x92\xA5"`.strip + "\n"
+    instructions_ln10 = "Have fun, and remember your Clausewitz!"
+    instructions_prompt = instructions_ln1 + instructions_ln2 + instructions_ln3 + instructions_ln4 + instructions_ln5 + instructions_ln6 + instructions_ln7 + instructions_ln8 + instructions_ln9 + instructions_ln10
 
     assert_equal instructions_prompt, @game.instructions
   end

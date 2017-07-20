@@ -1,6 +1,4 @@
 require './lib/battleship_game'
-require 'simplecov'
-SimpleCov.start
 
   game = BattleshipGame.new
   puts game.main_menu
