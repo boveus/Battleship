@@ -26,13 +26,13 @@ require './lib/battleship_game'
       end
       while game.turn != 'Over'
         if game.player_two_wins
-          print "YOU LOSE"
+          print "YOU LOSE - FOR SHAME. THE ADMIRALCY WILL HEAR OF THIS."
           game.over
           break
         elsif game.turn == 'Player1'
           game.player_firing_phase
         elsif game.player_one_wins
-          print "YOU WIN\n"
+          print "YOU WIN - ADMIRAL NIMITZ WOULD BE PROUD\n"
           puts game.print_player_shots
           game.over
           break
