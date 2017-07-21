@@ -44,7 +44,6 @@ computr_miss = false
 
 REPL - cmd line interaction
 
-
 read, evaluate, print, loop
 
 lib/battleship.rb
